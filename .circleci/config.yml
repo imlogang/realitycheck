@@ -91,6 +91,11 @@ workspaces_defaults: &workspaces_defaults
   working_directory: ~/foo/bar
 
 jobs:
+  runner:
+    machine: true
+    resource_class: imlogang/machine
+  steps:
+    - run: echo "Hello, World!"
   env-subst-example:
     executor: docker
     environment:
@@ -331,6 +336,10 @@ jobs:
           path: test-results
 
 workflows:
+  runner:
+    jobs:
+      - runner
+
   docker_resource_class_jobs:
     jobs:
       - executor_resource_class:
